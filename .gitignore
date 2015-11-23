@@ -5,16 +5,13 @@
 *woff
 *png
 *ico
-*js
-*css
-*json
 *eot
-*svg
 *ttf
-*html
 
-# IGNORE WORKING DIARY
-3
+# IGNORE SPECIFIED FILES
+3  # WORKING DIARY
+/book.json  # gitbook config
+
 
 # IGNORE EXCERCISE FILES
 LearnCTheHardWay/

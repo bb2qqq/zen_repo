@@ -1,0 +1,26 @@
+{
+    "over_view": "JSON is a data format comes from javascript, but now it is more like a general format standard, it has two major types: \"object\" and \"array\", you can nested them as you like",
+    "notice": [
+                "Values or key-values in object/array should be separated by a comma, but the last value/key-value-pair shouldn't have comma after it",
+                "Strings should be wrapped in \", not '",
+                "To type a \" in a string, you need to escape it with backslash \\ "
+              ],
+    "object": { "description":[
+                   "Object is like dict in python, except it only accept string as keys."
+                 ]
+              },
+    "array": ["array", "is", "an", "ordered", "collection", "of", "values." ],
+    "value": ["belowing are accepted values of JSON",
+                "string",
+                101,
+                true,
+                false,
+                null,
+                {"object": {}},
+                ["array"]
+             ],
+    "resources": { 
+        "Official site": "http://json.org/",
+        "JSON format checker": "http://www.jslint.com/"
+    }
+}
