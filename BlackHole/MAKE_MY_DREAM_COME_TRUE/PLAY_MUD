@@ -1,0 +1,87 @@
+Wed Dec 17 10:26:05 CST 2014
+
+    1. Add learn sentence function to zen_dict yesterday.
+    2. Made this directory, put it on top level, and going to use it.
+
+Wed Dec 17 23:38:13 CST 2014
+
+    Add bilingual function(b) to zen_dict
+
+Thu Dec 18 10:40:00 CST 2014
+
+    Create the lab for code improvement purpose of zen_dict.
+
+Sun Dec 21 13:15:33 CST 2014
+
+    Re-code the zen_dict to class style! Add a super_b adaptive exam feature!
+
+Tue Dec 23 10:40:14 CST 2014
+
+    Did a little more work on mcwiki
+
+Tue Dec 23 18:43:45 CST 2014
+
+    New zen_dict is buggy-pro, fix them out, Bro Zen!
+
+Thu Dec 25 09:14:34 CST 2014
+
+    Starts to import net element to mcwiki
+
+Fri Dec 26 11:33:10 CST 2014
+
+    Reconstruct the variable name of base_dict  [ unfinished ]
+
+Tue Dec 30 18:31:51 CST 2014
+
+    Made config synchronization of my mac.
+
+Wed Dec 31 18:21:45 CST 2014
+
+    Test b function of base_dict
+
+Sun Jan  4 09:25:52 CST 2015
+
+    清理zen_dict脏数据，重构init函数
+
+Sun Jan  4 23:43:23 CST 2015
+
+    清理和重构工作完成
+
+Tue Jan  6 12:57:49 CST 2015
+
+    使用a(b=1)时，会自动切换到副字典，想办法优化体验
+
+Tue Jan  6 17:15:33 CST 2015
+    Fix the merge conflict of origin and local, figure out where went wrong, try to find a way to avoid it [ DONE ]
+
+    * before push to origin, exam if the current directory is clean
+
+Wed Jan  7 16:10:08 CST 2015
+
+    Recite zen of python    [ unfinished ]
+
+Wed Jan 14 09:32:36 CST 2015
+
+    竟然又是一个星期过去没有动静了。热情已经失去，正在浅尝辄止。
+    给base_dict添加详尽的文档注释
+
+Wed Jan 14 13:02:11 CST 2015
+
+    Make ProjectManager Work    [ DONE ]
+
+Thu Jan 15 11:12:18 CST 2015
+
+    Make ProjectManager switch user function works well     [ DONE ]
+
+Thu Jan 22 12:40:07 CST 2015
+
+    Learn Some format skill     [ unfinished ]
+    convert all my tec notes to markdown    [ DONE ]
+
+Thu Jan 22 21:49:25 CST 2015
+
+    <kbd> </kbd> to produce keyboard effect on Stackoverflow
+
+Thu Jan 29 11:51:32 CST 2015
+
+    Learn to init gitbook project   [ DONE ]

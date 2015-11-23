@@ -1,0 +1,25 @@
+*sw*
+*pyc
+
+# IGNORE GITBOOK AUTO-GENERATE FILES
+*woff
+*png
+*ico
+*js
+*css
+*json
+*eot
+*svg
+*ttf
+*html
+
+# IGNORE WORKING DIARY
+3
+
+# IGNORE EXCERCISE FILES
+LearnCTheHardWay/
+
+# IGNORE GITBOOK FILES
+_book/
+gitbook/
+node_modules/
