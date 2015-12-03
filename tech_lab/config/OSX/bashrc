@@ -44,30 +44,30 @@ alias huge='eval $(thefuck $(fc -ln -1)); history -r'
 alias HUGE='huge'
 
 # Personal directory
-alias utils='pushd /Users/zen1/zen/pythonstudy/tech_lab/utils'
+alias utils='pushd /Users/zen1/zen/zen_repo/tech_lab/utils'
 alias dl='pushd /Users/zen1/zen/shared/download'
-alias gzd='pushd ~/zen/pythonstudy/creation/zen_dict'
-alias cre='pushd ~/zen/pythonstudy/creation/'
-alias mc='pushd ~/zen/pythonstudy/creation/zen_dict/mcwiki'
-alias alg='pushd ~/zen/pythonstudy/tech_lab/algorithm'
-alias lc='pushd ~/zen/pythonstudy/tech_lab/algorithm/leetcode'
-alias gcien='pushd ~/zen/pythonstudy/grocery/literatura/master_obra'
+alias gzd='pushd ~/zen/zen_repo/creation/zen_dict'
+alias cre='pushd ~/zen/zen_repo/creation/'
+alias mc='pushd ~/zen/zen_repo/creation/zen_dict/mcwiki'
+alias alg='pushd ~/zen/zen_repo/tech_lab/algorithm'
+alias lc='pushd ~/zen/zen_repo/tech_lab/algorithm/leetcode'
+alias gcien='pushd ~/local_repo/master_obra'
 alias au='pushd /Users/zen1/zen/automation'
-alias be='pushd ~/zen/pythonstudy/Brain_extension'
-alias gpm='pushd /Users/zen1/zen/pythonstudy/creation/project_manager'
-alias web='pushd /Users/zen1/zen/pythonstudy/creation/web_co_editor'
-alias sys='pushd /Users/zen1/zen/pythonstudy/creation/systematized_work'
+alias be='pushd ~/zen/zen_repo/Brain_extension'
+alias gpm='pushd /Users/zen1/zen/zen_repo/creation/project_manager'
+alias web='pushd /Users/zen1/zen/zen_repo/creation/web_co_editor'
+alias sys='pushd /Users/zen1/zen/zen_repo/creation/systematized_work'
 alias zb='pushd ~/zen/zenblog'
-alias mybook='pushd /Users/zen1/zen/pythonstudy/creation/my_book'
-alias m='pushd /Users/zen1/zen/pythonstudy/tech_lab/my_work'
+alias mybook='pushd /Users/zen1/zen/zen_repo/creation/my_book'
+alias m='pushd /Users/zen1/zen/zen_repo/tech_lab/my_work'
 alias nl='pushd /Users/zen1/zen/new_life/newer_life/normaldocuments' 
-alias book='pushd ~/zen/pythonstudy/book'
-alias cap='pushd /Users/zen1/zen/pythonstudy/Capitalist'
+alias book='pushd ~/zen/zen_repo/book'
+alias cap='pushd /Users/zen1/zen/zen_repo/Capitalist'
 alias lib='pushd ~/zen/shared/library'
 alias doc='pushd /Users/zen1/zen/shared/code_port/normaldocuments'
-alias crawl='pushd /Users/zen1/zen/pythonstudy/tech_lab/python_mania/module/scrapy/'
-alias math='/Users/zen1/zen/pythonstudy/tech_lab/math'
-alias top_thing_for_now='/Users/zen1/zen/pythonstudy/TOP_THING_FOR_NOW'
+alias crawl='pushd /Users/zen1/zen/zen_repo/tech_lab/python_mania/module/scrapy/'
+alias math='/Users/zen1/zen/zen_repo/tech_lab/math'
+alias top_thing_for_now='/Users/zen1/zen/zen_repo/TOP_THING_FOR_NOW'
 alias nzd='pushd /Users/zen1/zen/zen_dict/'
 
 
@@ -95,8 +95,11 @@ alias lst='ls -lhrt'
 alias lss='ls -lhrS'
 alias dus='du -h | sort -h'
 alias lsd='tree -d -L 1'
+alias lsf='ls -p | grep -v /'
 alias http='python -m SimpleHTTPServer 8000'
 alias vd='vimdiff'
+alias of="find . -type f -print0 | xargs -0 ls -lrt | head -n 1"  # Find the oldest file recursively in current directory
+alias nf="find . -type f -print0 | xargs -0 ls -lt | head -n 1"  # Find the newest file recursively in current directory
 
 # search
 alias gr='grep'
@@ -121,21 +124,19 @@ alias ga='git add .'
 
 
 # FILE MANIPULATION
-alias 1='vim /users/zen1/zen/pythonstudy/1'
-alias 2='vim /users/zen1/zen/pythonstudy/2.txt'
-alias 3='vim /users/zen1/zen/pythonstudy/3'
-alias cien='vim ~/zen/pythonstudy/grocery/literatura/master_obra/cien'
-alias phi='vim ~/zen/pythonstudy/Brain_Extension/Some_times_I_am_philosophical'
+alias 1='vim /users/zen1/zen/zen_repo/notes/1'
+alias 2='vim /users/zen1/zen/zen_repo/notes/2.txt'
+alias 3='vim ~/local_repo/3'
+alias cien='vim ~/local_repo/master_obra/cien'
 alias vb='vim ~/.bashrc'
-alias ct='cat ~/zen/pythonstudy/tree_hole'
-alias crt='cat ~/zen/pythonstudy/reasonable_tree_hole'
-alias cj='cat ~/zen/pythonstudy/joke'
+alias ct='cat ~/zen/zen_repo/notes/tree_hole'
+alias crt='cat ~/zen/zen_repo/notes/reasonable_tree_hole'
+alias cj='cat ~/zen/zen_repo/notes/joke'
 alias dt='. ~/.bashrc &> /dev/null'
-alias pyc='vim /Users/zen1/zen/pythonstudy/tech_lab/Pycharm/mac_note.md'
-alias mem='vim /Users/zen1/zen/pythonstudy/Brain_extension/memo'
-alias zen='vim ~/zen/pythonstudy/book/zen_book/zen.md'
-alias raw='vim /Users/zen1/zen/pythonstudy/Brain_extension/raw'
-alias fun='pushd /Users/zen1/zen/pythonstudy/fun'
+alias pyc='vim /Users/zen1/zen/zen_repo/tech_lab/Pycharm/mac_note.md'
+alias mem='vim /Users/zen1/zen/zen_repo/Brain_extension/thoughts/memo'
+alias zen='vim ~/zen/zen_repo/book/zen_book/zen.md'
+alias fun='pushd /Users/zen1/zen/zen_repo/fun'
 
 
 # local code directory
@@ -147,28 +148,29 @@ alias goen='pushd /Users/zen1/zen/shared/code_port/backend_english'
 alias goab='pushd /Users/zen1/zen/shared/code_port/backend_abstract'
 alias goport='pushd /Users/zen1/zen/shared/code_port/'
 alias gogb='pushd /Users/zen1/zen/shared/genesis/backend'
-alias pys='pushd /Users/zen1/zen/pythonstudy'
-alias dream='pushd ~/zen/pythonstudy/MAKE_MY_DREAM_COME_TRUE'
-alias bm='pushd /Users/zen1/zen/pythonstudy/tech_lab/bash_mania'
-alias pm='pushd /Users/zen1/zen/pythonstudy/tech_lab/python_mania'
-alias vs='pushd /Users/zen1/zen/pythonstudy/tech_lab/vim_skill'
-alias vida='pushd /Users/zen1/zen/pythonstudy/vida/'
-alias c='pushd /Users/zen1/zen/pythonstudy/tech_lab/C/LearnCTheHardWay'
-alias js='pushd /Users/zen1/zen/pythonstudy/tech_lab/javascript'
+alias pys='pushd /Users/zen1/zen/zen_repo'
+alias zs='pushd /Users/zen1/zen/zen_repo'
+alias dream='pushd ~/zen/zen_repo/MAKE_MY_DREAM_COME_TRUE'
+alias bm='pushd /Users/zen1/zen/zen_repo/tech_lab/TERMINALS/bash_mania'
+alias pm='pushd /Users/zen1/zen/zen_repo/tech_lab/python_mania'
+alias vs='pushd /Users/zen1/zen/zen_repo/tech_lab/vim_skill'
+alias vida='pushd /Users/zen1/zen/zen_repo/vida/'
+alias c='pushd /Users/zen1/zen/zen_repo/tech_lab/C/LearnCTheHardWay'
+alias js='pushd /Users/zen1/zen/zen_repo/tech_lab/javascript'
 alias d3='pushd /Users/zen1/projects/show_graphic_data'
 alias tornado='pushd /Library/Python/2.7/site-packages/tornado/'
 alias conf_ipy='pushd /Users/zen1/.ipython/profile_default/startup'
 
 # REMOTE HOST
-alias tec='pushd ~/zen/pythonstudy/tech_lab'
-alias old_tec='pushd ~/zen/pythonstudy/old_tech_lab'
+alias tec='pushd ~/zen/zen_repo/tech_lab'
+alias old_tec='pushd ~/zen/zen_repo/old_tech_lab'
 
 # Utilities
 alias r='open ~/zen/shared/library/reading/*'
-alias t='ipython -i /Users/zen1/zen/pythonstudy/tech_lab/utils/python_scripts/zen_py_tool.py'
+alias t='ipython -i /Users/zen1/zen/zen_repo/tech_lab/utils/python_scripts/zen_py_tool.py'
 alias gl='git log --pretty=format:"%h %<(13) %cn %ci  %d     %s  "'
-alias pro='vim /Users/zen1/zen/pythonstudy/book/notebook/pro_程序员日记'
-alias d='ipython -i /Users/zen1/zen/pythonstudy/creation/decision_maker.py'
+alias pro='vim /Users/zen1/zen/zen_repo/notes/pro_程序员日记'
+alias d='ipython -i /Users/zen1/zen/zen_repo/creation/decision_maker.py'
 # sc is short for trailing whitespace check
 alias sc='ggrep -Enr --color "\s+$" ./'
 # Disable Touch pad
@@ -214,14 +216,14 @@ export -f wkcn
 
 
 # log functions
-function th { CUR_TIME=`date +"%Y-%m-%d %H:%M"`; echo -e "\n$@\n\t\t\t\t\t\t\t\t\t$CUR_TIME" >> /Users/zen1/zen/pythonstudy/tree_hole; }
-function nth { { echo; cat; } >> /Users/zen1/zen/pythonstudy/tree_hole; CUR_TIME=`date +"%Y-%m-%d %H:%M"`;
-                  echo -e "\t\t\t\t\t\t\t\t\t$CUR_TIME" >> /Users/zen1/zen/pythonstudy/tree_hole; }
-function rth { CUR_TIME=`date +"%Y-%m-%d %H:%M"`; echo -e "\n$@\n\t\t\t\t\t\t\t\t\t$CUR_TIME" >> /Users/zen1/zen/pythonstudy/reasonable_tree_hole; }
-function nrth { { echo; cat; } >> /Users/zen1/zen/pythonstudy/reasonable_tree_hole; CUR_TIME=`date +"%Y-%m-%d %H:%M"`;
-                  echo -e "\t\t\t\t\t\t\t\t\t$CUR_TIME" >> /Users/zen1/zen/pythonstudy/reasonable_tree_hole; }
-function joke { { echo; cat; } >> /Users/zen1/zen/pythonstudy/joke; CUR_TIME=`date +"%Y-%m-%d %H:%M"`;
-                  echo -e "\t\t\t\t\t\t\t\t\t$CUR_TIME" >> /Users/zen1/zen/pythonstudy/joke; }
+function th { CUR_TIME=`date +"%Y-%m-%d %H:%M"`; echo -e "\n$@\n\t\t\t\t\t\t\t\t\t$CUR_TIME" >> /Users/zen1/zen/zen_repo/notes/tree_hole; }
+function nth { { echo; cat; } >> /Users/zen1/zen/zen_repo/notes/tree_hole; CUR_TIME=`date +"%Y-%m-%d %H:%M"`;
+                  echo -e "\t\t\t\t\t\t\t\t\t$CUR_TIME" >> /Users/zen1/zen/zen_repo/notes/tree_hole; }
+function rth { CUR_TIME=`date +"%Y-%m-%d %H:%M"`; echo -e "\n$@\n\t\t\t\t\t\t\t\t\t$CUR_TIME" >> /Users/zen1/zen/zen_repo/notes/reasonable_tree_hole; }
+function nrth { { echo; cat; } >> /Users/zen1/zen/zen_repo/notes/reasonable_tree_hole; CUR_TIME=`date +"%Y-%m-%d %H:%M"`;
+                  echo -e "\t\t\t\t\t\t\t\t\t$CUR_TIME" >> /Users/zen1/zen/zen_repo/notes/reasonable_tree_hole; }
+function joke { { echo; cat; } >> /Users/zen1/zen/zen_repo/notes/joke; CUR_TIME=`date +"%Y-%m-%d %H:%M"`;
+                  echo -e "\t\t\t\t\t\t\t\t\t$CUR_TIME" >> /Users/zen1/zen/zen_repo/notes/joke; }
 export -f th
 export -f rth
 export -f nrth
@@ -230,13 +232,13 @@ export -f nth
 
 
 # Utility function
-function zd { pushd ~/zen/pythonstudy/creation/zen_dict/; ipython -i ~/zen/pythonstudy/creation/zen_dict/base_dict.py "$1"; pushd;}
+function zd { pushd ~/zen/zen_repo/creation/zen_dict/; ipython -i ~/zen/zen_repo/creation/zen_dict/base_dict.py "$1"; pushd;}
 export -f zd
 
 # multilple clipboard
 # 请将multi_clip_dir修改为你指定的文件夹/文件抬头(确保文件夹存在），该文件夹将用来存放临时文件
 # 请将default_multi_clip_text替换为你在使用不带参数的`x`命令时自动注入clipboard的文本
-multi_clip_dir="/Users/zen1/zen/pythonstudy/tech_lab/utils/multple_clipboard/buffer_zone/tmp"
+multi_clip_dir="/Users/zen1/zen/zen_repo/tech_lab/utils/multple_clipboard/buffer_zone/tmp"
 default_multi_clip_text="/Users/zen1/zen/shared/genesis/backend/"
 function z {
     if [ -n "$1" ]
@@ -268,7 +270,7 @@ function pme {
    else
         user="zen"
    fi
-   ipython -i /Users/zen1/zen/pythonstudy/creation/project_manager/project_manager.py $user
+   ipython -i /Users/zen1/zen/zen_repo/creation/project_manager/project_manager.py $user
 }
 
 function pms {
@@ -278,7 +280,7 @@ function pms {
     else
         user="zen"
     fi
-    python  /Users/zen1/zen/pythonstudy/creation/project_manager/project_manager.py $user show "$2"
+    python  /Users/zen1/zen/zen_repo/creation/project_manager/project_manager.py $user show "$2"
 }
 
 function pmcki {
@@ -288,7 +290,7 @@ function pmcki {
     else
         user="zen"
     fi
-    python  /Users/zen1/zen/pythonstudy/creation/project_manager/project_manager.py $user check_in "$2"
+    python  /Users/zen1/zen/zen_repo/creation/project_manager/project_manager.py $user check_in "$2"
 }
 export -f pme
 export -f pms

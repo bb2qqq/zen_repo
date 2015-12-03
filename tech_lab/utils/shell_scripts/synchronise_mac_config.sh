@@ -8,6 +8,7 @@ cp ~/.vimrc ~/zen/zen_repo/tech_lab/config/CrossPlatform/vimrc
 cp ~/.vimrc ~/zen/zen_repo/tech_lab/config/OSX/vimrc
 cp ~/local_vim_scripts.vim ~/zen/zen_repo/tech_lab/config/OSX/local_vim_scripts.vim
 cp ~/.vim/plugin/* /Users/zen1/zen/zen_repo/tech_lab/vim_skill/my_plugin
+cp /usr/local/share/vim/vim74/colors/mario.vim /Users/zen1/zen/zen_repo/tech_lab/vim_skill/
 
 # Universal code
 cp /Users/zen1/zen/automation/General/new_system/general_gadget/* /Users/zen1/zen/zen_repo/tech_lab/my_work/zen_system/

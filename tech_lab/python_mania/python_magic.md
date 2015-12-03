@@ -1,7 +1,33 @@
-## 启动supervisord
-    supervisord -c /path/to/superviosrd.conf
-> supervisord will automatically try to find a config path. If no config find, error raise.
+### 对原函数/类方法进行inspect/审查的decorator
 
+    def function_inspecter(func):
+        def new_func(*args, **kwargs):
+            Lucky_number = [6, 7, 8, 9]
+            result = func(*args, **kwargs)
+            if type(result) == int and result in Lucky_number:
+                return "You are Lucky"
+            else:
+                return result
+        return new_func
+
+
+    def method_inspector(method):
+        BANNED_WEBSITES = ['google', 'facebook', 'youtube', 'twitter']
+        BANNED_WORDS = ['法轮功', '共产党']
+
+        def new_method(self, *args, **kwargs):  # 此处的self参数是为了对类方法进行inspect所加
+            if getattr(self, 'name', None) in BANNED_WEBSITES:
+                return "404 网站无法访问"
+            result = method(self, *args, **kwargs)
+            for i in result:
+                if type(i) != str:
+                    continue
+                for banned_word in BANNED_WORDS:
+                    if banned_word in i:
+                        return "该网站含有不恰当内容"
+            return result
+
+        return new_method
 
 
 ### 将任意字符串变成全局变量
@@ -10,7 +36,6 @@
       command_1 = 'global %s' % target_string
       exec(command_1)
       globals()[target_string] = self
-
 
 
 ### 在全局变量中执行字符串命令
@@ -104,7 +129,7 @@ exec默认是在locals()变量环境里执行语句，如果想要在全局变�
 ### 快速打印格式化的当前年月日和时分秒
     import time
     time.strftime('%F %T')
-    # %F 是年月日在time模块里的快捷表示，%T是时分秒的快捷表示
+    # %F 是年月日在time模块里的快捷表示，%T是时分秒的快捷表示, 样例：2015-01-01 00:00:00
 
 ### 一句话反转字典键值对
     inv_map = {v:k for k,v in my_dict.items()}

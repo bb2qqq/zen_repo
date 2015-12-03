@@ -1,3 +1,6 @@
+### Using iterm to broadcast input to multiple terminals
+Selecet `Shell` in toolbar -> select `Broadcast input` -> choose your prefer options.
+
 ### List file and directories by size
 
     du -hs * | sort -h
@@ -67,7 +70,8 @@ By using `-s`, if a character repeat itself continuously, and that char is in `s
     $ echo "I  will     crush   you" | tr -s " "  " "
     I will crush you
 
-** Beaware, `echo "XXXYYY" | tr -s "XY" "Z"` will give you a single `Z` instead of `ZZ`. **
+**Beaware, `echo "XXXYYY" | tr -s "XY" "Z"` will give you a single `Z` instead of `ZZ`.**
+
 ### Remove Newline from input
 
     Input_command | tr -d '\n'
@@ -242,19 +246,6 @@ View exit status of the most recent command
 View network status
 
     iftop
-
-
-### SED ###
-
-
-* find line of file contains keyword and del it
-
-	  sed -i '/key_word/d' target_file
-
-
-* print specific line in linux, here print the line 100
-
-	  sed -n '100p'
 
 
 ### PROCESS ###

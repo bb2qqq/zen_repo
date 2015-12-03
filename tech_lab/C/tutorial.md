@@ -4,8 +4,8 @@ C语言如何写一个(只接受一个参数，但这个参数可以为int或cha
 
 
 ### Point Lexicon
-`type *ptr`  
-    "a pointer of type named ptr"
+`type *ptr`
+	 "a pointer of type named ptr"
 
 `*ptr`
     "the value of whatever ptr is pointed at"

@@ -28,6 +28,8 @@ ca 80off match OverLength /\%8000v.\+/
 ca utf normal 1GO# coding: utf-8
 " Remove trailing blanks
 ca rmb :%s/\s\+$//g
+" get current file name
+ca fn put %
 
 " markdown comment
 ia cmt [//]: # (Type_your_comments_here)

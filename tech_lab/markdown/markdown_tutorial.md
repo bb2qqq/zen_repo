@@ -1,11 +1,26 @@
-### ON STACKOVERFLOW ###
+### 文档内跳转
 
-* To produce the real key effection
-    
-      <kbd> KEY </kbd>
+在你需要跳转到的目的地位置加入如下代码
+
+    <a id="anchor_name"></a>
+
+然后便可以使用`[key_word](#anchor_name)`来实现文档内的跳转了！
 
 
-### BASIC ###
+
+### HyperLinks
+In markdown, you can link a text to a hyperlink in 3 ways:
+
+1. [Number Reference][1]
+2. [Tag Reference][Redis]
+3. [Direct Reference](https://www.stackoverflow.com)
+
+[1]:https://www.nginx.org
+[Redis]:https://www.redis.io
+
+
+
+## BASIC
 
 Indentation for each label is 2 space.
 Indentation for code is 4 space.
@@ -24,7 +39,7 @@ This is an example:
       code1             \#  belong to Label1
 
   * Label2              \#  sub label of Label1
-    
+
         code2           \#  belong to Label2
 
     * Label3            \#  sub label of Label2
@@ -32,3 +47,10 @@ This is an example:
     code4               \#  belongs to Label3, so need more indentation to get code visual effect.
 
   * Label4              \# sub label of Label1
+
+
+### ON STACKOVERFLOW
+
+* To produce the real key effection
+
+      <kbd> KEY </kbd>

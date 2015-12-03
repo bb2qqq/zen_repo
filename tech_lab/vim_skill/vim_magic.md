@@ -1,3 +1,17 @@
+### Exec vim command to multiple files(argdo)
+Basic usage:
+    :args *file_pattern
+    :argdo my_command | update
+
+Practical example:
+    :args *py
+    :argdo %s/$//g | update
+
+The example above will remove windows newline in all python files of current directory.
+
+> Using `:h argdo` in vim to view official doc.  
+> [Discussion on SO](http://stackoverflow.com/questions/7126789/vim-run-a-command-on-multiple-files)  
+
 ### Run vimdiff in colorless mode
 
     TERM=vt100 vimdiff file1 file2

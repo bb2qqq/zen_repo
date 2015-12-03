@@ -56,10 +56,10 @@ Run these 2 commands in serial order:
 ### pull from the upstream branch, If your local branch is checking out from a remote branch, that remote branch is upstream branch of this local branch
     git pull
 
-### To push local branch datas to remote and create a remote branch if there isn`t such a branch
+### To push local branch datas to remote and create a remote branch if there isn't such a branch
     git push remote_name  local_branch_name
 
-### Push local branch data to specified remote branch, if there isn`t such a remote branch, create one.
+### Push local branch data to specified remote branch, if there isn't such a remote branch, create one.
     git push remote_name local_branch_name:remote_branch_name
 
 ### Push local branch to remote tracking branch by force, whcih may cause remote commit loss, use it with caution.
