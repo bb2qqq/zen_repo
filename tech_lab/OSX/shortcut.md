@@ -1,4 +1,8 @@
-### Check to external drive
+### Modify application shortcuts
+System Preferences -> Keyborad -> Choose your application.  
+[Tutorial](http://forums.macrumors.com/threads/change-keyboard-shortcut-to-switch-tabs-in-safari.1439459/)
+
+### Check out to external drive
     cd /Volumes/your_target
 
 

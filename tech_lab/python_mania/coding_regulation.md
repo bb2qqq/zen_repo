@@ -553,7 +553,9 @@ python包名应该是简短的，全小写的名字，不推荐使用下划线`_
 <br>
 当一个用 C 或 C++ 写的扩展模块，有一个伴随的 Python 模块来提供一个更高层(例如，更面向对象)的接口时，C/C++ 模块名有一个前导下划线 (如：`_socket`)。
 
-> 关于魔法method的guide: http://www.rafekettler.com/magicmethods.html
+> 关于魔法method的guide: http://www.rafekettler.com/magicmethods.html  
+> 如果子类继承的父类里有使用`_`或`__`开头的方法，对子类使用`vars()`的打印结果里是没有它们的。但是它们实际上会被子类继承。  
+> 但以`__`开头的方法是进行了重命名后再被子类继承的。
 
 ** 需要避免的命名方式 **
 

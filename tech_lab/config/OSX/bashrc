@@ -1,7 +1,7 @@
 ###########   MAIN  ############
 
 # Using virtualenv python as primary python
-source /ve/bin/activate
+#source /ve/bin/activate
 
 # Replace BSD utility with GNU utility
 PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
@@ -35,7 +35,6 @@ PS1='\[\033[01;34m\]\u@\h\[\033[00;33m\]\w\[\033[32m\]$(parse_git_branch)\[\033[
 # Perl config on mac
 PERL_MB_OPT="--install_base \"/Users/zen1/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/Users/zen1/perl5"; export PERL_MM_OPT;
-
 
 ##########  ALIAS  #############
 
@@ -74,6 +73,7 @@ alias nzd='pushd /Users/zen1/zen/zen_dict/'
 # COMMANDS
 alias py='python'
 alias py3='python3'
+alias p3='python3'
 alias ipy='ipython -i'
 alias pd='pushd'
 alias pbc='pwd | pbcopy'
@@ -91,6 +91,8 @@ alias rdm='vim readme.md'
 alias vg='valgrind --track-origins=yes'
 alias ez='make exz && ./exz'
 alias vz='vim exz.c'
+alias ep='make practice && ./practice'
+alias vp='vim practice.c'
 alias lst='ls -lhrt'
 alias lss='ls -lhrS'
 alias dus='du -h | sort -h'
@@ -100,6 +102,10 @@ alias http='python -m SimpleHTTPServer 8000'
 alias vd='vimdiff'
 alias of="find . -type f -print0 | xargs -0 ls -lrt | head -n 1"  # Find the oldest file recursively in current directory
 alias nf="find . -type f -print0 | xargs -0 ls -lt | head -n 1"  # Find the newest file recursively in current directory
+# Anarconda alias
+alias conda="/Users/zen1/miniconda2/bin/conda"
+alias ipython3="source /Users/zen1/miniconda2/bin/activate py3k; ipython; source /Users/zen1/miniconda2/bin/deactivate;"
+
 
 # search
 alias gr='grep'
@@ -107,12 +113,14 @@ alias grep='GREP_COLOR="1;33;40" LANG=C grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 # git
+alias remote="git config --get remote.origin.url"
 alias ga='git add'
 alias gb='git branch '
 alias gc='git checkout '
 alias gd='git diff'
 alias gpl='git pull'
 alias gps='git push'
+alias gpso='git push origin'
 alias gs='git status '
 alias gcm='git commit '
 alias gt='git log --tags --simplify-by-decoration --pretty="format:%ci %d"'
@@ -135,7 +143,7 @@ alias cj='cat ~/zen/zen_repo/notes/joke'
 alias dt='. ~/.bashrc &> /dev/null'
 alias pyc='vim /Users/zen1/zen/zen_repo/tech_lab/Pycharm/mac_note.md'
 alias mem='vim /Users/zen1/zen/zen_repo/Brain_extension/thoughts/memo'
-alias zen='vim ~/zen/zen_repo/book/zen_book/zen.md'
+alias zen='vim ~/zen/zen_repo/notes/zen.md'
 alias fun='pushd /Users/zen1/zen/zen_repo/fun'
 
 
@@ -196,6 +204,12 @@ export -f bs
 function gf { grep -Fnr "$*" --exclude={"local_config.py","pay_info.txt"} ./; }
 export -f gf
 
+function deactivate_conda3 { source /Users/zen1/miniconda2/bin/deactivate; }
+function ipy3 { source /Users/zen1/miniconda2/bin/activate py3k; ipython  "$@"; deactivate_conda3}
+export -f ipy3
+
+function fk { grep -Fr "$*" --exclude={"local_config.py","pay_info.txt"} ./ | awk '{FS=":"; print $1}' | sort -u ; }
+export -f fk
 
 # online functions
 function go { w3m "http://www.google.com/#q=$*";}
@@ -238,6 +252,8 @@ export -f zd
 # multilple clipboard
 # 请将multi_clip_dir修改为你指定的文件夹/文件抬头(确保文件夹存在），该文件夹将用来存放临时文件
 # 请将default_multi_clip_text替换为你在使用不带参数的`x`命令时自动注入clipboard的文本
+# 使用z + [file_name] + content来储存你的文本到指定的cache
+# 用用x + [file_name] 来粘贴cache里的内容
 multi_clip_dir="/Users/zen1/zen/zen_repo/tech_lab/utils/multple_clipboard/buffer_zone/tmp"
 default_multi_clip_text="/Users/zen1/zen/shared/genesis/backend/"
 function z {
@@ -292,6 +308,9 @@ function pmcki {
     fi
     python  /Users/zen1/zen/zen_repo/creation/project_manager/project_manager.py $user check_in "$2"
 }
+
 export -f pme
 export -f pms
 export -f pmcki
+
+

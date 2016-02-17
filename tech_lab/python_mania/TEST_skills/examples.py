@@ -92,5 +92,28 @@ def test3():
     if not x:
         print 'test2 NOT OK'
 
+def test():
+    ###Your code here.
+    q = Queue(2)
+    assert q.is_empty()
+    assert not q.full()
+    assert q.enqueue(0)
+    assert not q.is_empty()
+    assert not q.full()
+    assert q.dequeue() == 0
+    assert q.is_empty()
+    assert not q.full()
+    assert q.enqueue(-5)
+    assert not q.is_empty()
+    assert not q.full()
+    assert q.enqueue(11)
+    assert not q.is_empty()
+    assert q.full()
+    assert not q.enqueue(3)
+    assert q.dequeue() == -5
+    assert q.dequeue() == 11
+    assert q.empty()
+
+test()
 test2()
 test3()

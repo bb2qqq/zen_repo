@@ -14,8 +14,8 @@ so /Users/zen1/zen_tool.vim
 " http://stackoverflow.com/questions/31427172/why-my-multiple-command-vim-command-mode-abbreviation-will-be-executed-automatic/31427473?noredirect=1#comment50827919_31427473
 ca ml %s/^/"/g <bar> %s/$/",/g <bar> 1s/^/[/ <bar> $s/$/]/
 ca ai set autoindent
-ca csp set spell
-ca ncsp set nospell
+ca ssp set spell
+ca nsp set nospell
 ca pa set paste
 ca tlg TlistToggle
 ca vres vertical resize
@@ -66,7 +66,6 @@ function! MyColors()
 
 " FUNCTION ABBREVIATIONS
 ca m2 Max2num
-ca asp AddShellPrompt
 " Enable MyColors
 " augroup colors
 "     autocmd!
@@ -86,7 +85,7 @@ set title
 set autochdir
 syntax on
 " This will influence the spell error checking result
-set spelllang=en,es,cjk
+set spelllang=es,en,cjk
 set dictionary+=/usr/share/dict/words
 set dictionary+=/usr/share/dict/spanish
 set thesaurus+=/usr/share/dict/mthesaur.txt

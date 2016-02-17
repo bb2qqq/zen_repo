@@ -263,3 +263,27 @@ s.length
 
 2015-12-03 09:40
 在python bug tracker上raise的两个issue都被agreed了！wow.
+
+
+2015-12-23 11:32
+一年半了，今天终于明白了stackoverflow是个啥了。
+
+
+2015-12-24 11:34
+今天决定学一下python的文档规范，看了fabric和flask的写法。貌似都采用了如下的写法。
+我也这么干！
+
+def sample(a, b):
+"""
+    Brief description
+    Detailed descriptions
+    :param a:
+        description about param a
+    :param b:
+        description about param b
+    :returns: (optional, depends on situations)
+        description about return values if it worth mentiond
+"""
+
+2015-12-28 10:43
+今天把shadowsocks的client发了一份到marioykuky的163邮箱。以备不时之需。

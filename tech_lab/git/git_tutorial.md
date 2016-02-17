@@ -2,7 +2,11 @@
   * <a href='#stash_save'> save </a>
 
 
-### Stash
+## Stash
+### save untracked files
+    git stash -u "Message"
+
+### Others
 <a id ='stash_save' >
 uisng `git stash` or `git stash save` to save current working directory status into stash  
 You can add a message after `git stash save`  as a reminder, such as:  

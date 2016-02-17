@@ -2,8 +2,33 @@
 C语言如何写一个(只接受一个参数，但这个参数可以为int或char)的函数？  
 没有pointer的struct，内存里的数据如何删除掉。  
 
+### type casting
+在C语言里，你可以将一个type转换成另一个type, 基本的syntax是`(type_name) expression`
 
-### Point Lexicon
+
+### char name[] = "Mario"; 和 char \*name = "Mario"; 的区别
+
+简单说来`char name[] = "Mario"` 定义了一个array, array里的元素都在当前scope的stack里。  
+而`char *name = "Mario";`定义了一个指针，该指针储存在当前scope的stack里，而它指向的内容"Mario"则存在内存里另外某处（是heap吗？）  
+
+这两种方法，都是现在内存里先生成一个string literal，存放字符串的内容，这个string literal的内容是不应该被改写的。  
+`char name[]`会将该literal的内容完全复制到一块新的内存上，你可以任意改写这块内存上的值。  
+`char *name`则是申请一小块内存，这一小块内存的类型是一个16进制的long型数字，它的值则是string literal的内存地址。  
+
+
+[相关讨论](http://stackoverflow.com/questions/1335786/c-differences-between-char-pointer-and-array)
+
+
+## POINTERS
+
+### Pointer Mechanism
+Pointer的本质是指定内存地址的值。
+当你将一个pointer指向某个类型的数据，c语言会找到该数据的内存地址，将它的值赋给你指定的指针名。  
+而`*ptr`本质上是说，给我拿到我这个`ptr`所指向的内存地址上储存的值。  
+在C语言里貌似输入内存地址和正确的值，可以打印出该内存上储存的值，如果类型不对的话，C貌似会把内存地址转换，[相关讨论](http://stackoverflow.com/questions/34542481/whats-the-rules-that-c-converts-address-to-int/34542796#34542796)
+
+> 当你使用`printf("%s")`时，%s会自动做一个对pointer取值的动作，所以你只需把pointer对象传给c，而不是pointer的值。
+### Pointer Lexicon
 `type *ptr`
 	 "a pointer of type named ptr"
 
@@ -188,7 +213,7 @@ Basically you can add any shell command in the Make file. Below is an example:
     cc my_program.c -o arbitary_name_for_executable_file
 
 
-### Prinf Formatters
+### Prinf Formatters & Specifiers
 [Tutorial](http://www.codingunit.com/printf-format-specifiers-format-conversions-and-formatted-output)
 
 Formatters:
@@ -199,3 +224,29 @@ Formatters:
     \b  backspace
     \v  vertical tab
     \f  new page
+
+Specifiers:
+A format specifier follows this prototype:  
+`%[flags][width][.precision][length]specifier`
+
+Belowing are results from printing different format of -99, 15, 3.1415926
+
+    specifier       Output                          Examples
+    d or i      Signed decimal integer              -99
+    u           Unsigned decimal integer            15
+    o           Unsigned octal                      17
+    x           Unsigned hexadecimal integer        f
+    X           Uppercase unsigned hexadecimal      F
+    f           Decimal floating point, lowercase   3.141593
+    F           Decimal floating point, uppercase   3.141593
+    e           Scientific notation lowercase       3.141593e+00
+    E           Scientific notation uppercase       3.141593E+00
+    g           min(%e, %f)                         3.14159
+    G           min(%E, %F)                         3.14159
+    a           hexdecimal floating, lowercase      0x1.921fb4p+1
+    A           hexdecimal floating, uppercase      0X1.921FB4P+1
+    c           Character
+    s           String of characters
+    p           Pointer address
+    n           现在不知道干什么的神秘存在
+    %           %% prints symbol %

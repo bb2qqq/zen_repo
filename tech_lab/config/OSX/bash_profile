@@ -7,3 +7,9 @@ export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx      # original_tutorial_link:  http://ap
 if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash > /dev/null 2>&1
 fi
+
+# added by Anaconda3 2.4.1 installer
+export PATH="/Users/zen1/anaconda/bin:$PATH"
+
+# added by Miniconda2 3.19.0 installer
+export PATH="/Users/zen1/miniconda2/bin:$PATH"

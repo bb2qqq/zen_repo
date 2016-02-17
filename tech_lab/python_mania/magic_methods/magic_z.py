@@ -40,6 +40,7 @@ class MagicBall(list):
         # Assign attrs
         self._bool = 1
         self._value = 0
+        self._count = 0
         self.age_0 = time.mktime(time.strptime(age_0, '%Y-%m-%d'))
         self.age_30 = self.age_0 + 30 * 31557600   # Scientific seconds in a year
 
@@ -150,6 +151,15 @@ class MagicBall(list):
             Now it returns what we specified below.
         """
         return ['Access Denied']
+
+    def __iter__(self):
+        """ 此方法将你的object变成一个iterable，使其能够被for, in语句所理解。
+        在此处__iter__和其他magic_method有冲突，导致MagicBall的实例不能被*args解析。
+        """
+        while self._count < self.__len__():
+            yield self._count
+            self._count += 1
+        self._count = 0
 
     ### ATTRIBUTE ACCESS
     def __getattr__(self, name):

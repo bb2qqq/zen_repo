@@ -14,6 +14,22 @@
 * [matplotlib](http://matplotlib.org/downloads.html)
 * nltk
 
+# Install Python Tools
+* pylint (代码检查简直太好用）
+
+# Install ipython3
+Install ipython3 on OSX is a bit tricky.  
+Theoratically we just need use `pip3 install ipython[all]`, then you can use `ipython3` to use ipython.  
+But it didn't work on my OSX. So we need to install anaconda first.  
+Anarconda is a set of integrated packages. This is the [download link](https://www.continuum.io/downloads)  
+After installed anarconda with `bash Anaconda3-2.4.1-MacOSX-x86_64.sh`, you may need to set something in your bashrc to trigger anaconda, like  
+`alias conda="~/miniconda2/bin/conda"`  
+Then, use `conda create -n py3k python=3 ipython` to install an ipython3 in conda path.  
+Put this alias in your .bashrc then you can use ipython3!  
+`alias ipython3="source ~/miniconda2/bin/activate py3k; ipython; source ~/miniconda2/bin/deactivate;"`
+
+
+
 # Install macdown(A updated version of Mou)
     http://macdown.uranusjr.com/
 

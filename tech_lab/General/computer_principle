@@ -1,5 +1,12 @@
-# CPU
-Calculating
+### 编程语言强弱类型，动态静态类型的区分方法
+
+[知乎讨论](https://www.zhihu.com/question/19918532)
+
+    我的总结:
+    强类型：不允许不可知错误发生，（所有可能错误都已在forbidden behaviour里列出）
+    弱类型： 允许不可知错误发生，通常支持类型隐式转换
+    动态语言：在运行时拒绝ill behave
+    静态语言：在编译时拒绝ill behave
 
 
 # MEMORY

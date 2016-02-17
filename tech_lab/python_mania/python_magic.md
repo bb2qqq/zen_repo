@@ -1,3 +1,128 @@
+[//]: # (此文件里的技巧可以保证适用于python2.7版本，但在较旧或3系列的python版本里，可能会失效)
+
+### Copy multiple object in a list
+
+    1.  `['obj'] * 10`
+    2.  `list(itertools.repeat('obj', 10))`
+
+
+### Else if in single expression
+
+**List Comprehension**
+
+    >>> [i if i < 0 else (i, 2) if i%2 == 0 else "good" if 1 < i < 10 else 'bad' for i in range(10)]
+    [(0, 2), 'bad', (2, 2), 'good', (4, 2), 'good', (6, 2), 'good', (8, 2), 'good']
+
+**lambda function**
+
+    complicate_lambda_func = lambda *args, **kwargs: \
+        "No message" if len(args) + len(kwargs) < 2  \
+        else "Yes, sir!" if ('id' in kwargs and kwargs['id'] == 'General') \
+        else "There is no door for you" if 'alibaba' in args \
+        else "It's already long enough, let's top here"
+
+    >>> complicate_lambda_func(1,2,3)
+    "It's already long enough, let's top here"
+    >>> complicate_lambda_func(command='fuck me', id='General')
+    'Yes, sir!'
+    >>> complicate_lambda_func("老乡", "开门啊", "我是", 'alibaba')
+    'There is no door for you'
+
+看完上面两个例子，我越发觉得elif是源自于 `else value if conditon` 的表达方式了。  
+不过与elif不同的时候，上述例子的`else if`表达式最后一定得跟一个单纯的`else`语，不然报错在等着你！
+
+
+### Print without newline
+If you use a comma in the end of your print statement, you will not print newline character(python2.7):
+
+    >>> for i in range(6):
+    ...     print i,
+    ...
+    0 1 2 3 4 5
+
+[More discussions](http://stackoverflow.com/questions/18908897/whats-ending-comma-in-print-function-for)
+
+### Unpacking Argument Lists
+在python里你可以使用`*`来给函数定义可接受任意个参数。同时你也可以用`*`来将一个iterator unpack成一系列args传给函数!  
+str, list, tuple, dict都可以使用这个技术，不过dict出来的参数顺序可能是乱的，因为hash的特性。  
+
+    def print_args(*args):
+        print " -- ".join(map(str, args))
+
+    # Str
+    >>> print_args(*"Monster")
+    M -- o -- n -- s -- t -- e -- r
+
+    # List
+    >>> print_args(*range(5))
+    0 -- 1 -- 2 -- 3 -- 4
+
+    # Tuple
+    >>> print_args(*("Harry Poter", "Princess White"))
+    Harry Poter -- Princess White
+
+    # Dict
+    >>> print_args(*{"a":1, "b":2, "c":3, "d":4})
+    a -- c -- b -- d
+
+### Unpacking keyword args
+Mapping object可以用`**`来unpacking, 但是key必须是字符串。  
+
+    def print_kwargs(**kwargs):
+        for i, j in kwargs.items():
+            print i, '\t', j
+
+    >>> print_kwargs(**{"a": 1, "b": 2})
+    a   1
+    b   2
+
+你也可以自定义一个对象，只要它有`__getitem__`和`keys`两个方法并且有符合规范的处理逻辑， 它也能被`**`unpacking.  
+[stackoverflow相关讨论](http://stackoverflow.com/questions/34285414/how-to-define-self-made-object-that-can-be-unpacked-by)
+
+    class MyMapping(object):
+        def __getitem__(self, key):
+            if int(key) in range(5):
+                return "Mapping and unpacking!"
+
+        def keys(self):
+            return map(str, range(5))
+
+    >>> my_mapping = MyMapping()
+    >>> print_kwargs(**my_mapping)
+
+    1   Mapping and unpacking!
+    0   Mapping and unpacking!
+    3   Mapping and unpacking!
+    2   Mapping and unpacking!
+    4   Mapping and unpacking!
+
+
+### 调用运算结果的属性。
+
+在Python里，如何将一个函数名指给一个运算结果的属性？  
+你只需要将运算结果用`()`包裹起来，接着便可把`()`当成一个对象，调用它的属性了！  
+
+    from datetime import datetime
+    unix_start_date = datetime.fromtimestamp(0)
+    current_date = datetime.now()
+    delta_date = (current_date - unix_start_date).days
+
+
+### Format String with dictionray variables
+
+    my_dict = {
+        "my_name": "Liu ting",
+        "my_age": 13,
+        "my_boss": "Liu lao gen",
+        "adjective1": "Handsome",
+        "adjective2": "Dirty",
+        "python_toy": (set(["Secondary life", "Love me", "You bold bold!"]), {"Idol": "DggggJ", "Hijastra": "XOK"}, ["P", "Y", "T", "H", "O", "N"]),
+    }
+
+    print "大家好，我叫{my_name}, 今年{my_age}岁，我的老板叫{my_boss}, 他有时候{adjective1},有时候{adjective2}, 我最爱的玩具是: \n\n{python_toy}".format(**my_dict)
+
+
+
 ### 对原函数/类方法进行inspect/审查的decorator
 
     def function_inspecter(func):
@@ -113,11 +238,6 @@ exec默认是在locals()变量环境里执行语句，如果想要在全局变�
 ### 让一个python文件打印自己的所有内容！
     print open(__file__).read()
 
-### 快速将字符串解析成datetime对象
-    from dateutil import parser
-    datetime_obj = parser.parse(datetime_str, fuzzy=True)
-
-> fuzzy=True会开启模糊模式，忽略一些parser不能识别的字符
 
 ### 在cent-OS上给python安装mysql模块
     # First you shall install mysql-devel, such as:
@@ -125,11 +245,6 @@ exec默认是在locals()变量环境里执行语句，如果想要在全局变�
     # Then install mysql module in python
     pip install mysql
 
-
-### 快速打印格式化的当前年月日和时分秒
-    import time
-    time.strftime('%F %T')
-    # %F 是年月日在time模块里的快捷表示，%T是时分秒的快捷表示, 样例：2015-01-01 00:00:00
 
 ### 一句话反转字典键值对
     inv_map = {v:k for k,v in my_dict.items()}
@@ -223,19 +338,53 @@ exec默认是在locals()变量环境里执行语句，如果想要在全局变�
 
 
 
+
+## DATETIME AND TIME
+
+### 获取当前某个日期午夜的datetime对象
+    # 假定我们拿到了传入的datetime_obj
+    from datetime import datetime
+    mid_night = datetime.combine(datetime_obj.date(), datetime.min.time())
+
+    # 一个判断传入字符串是否是当日零点的函数
+    def is_midnight(date_str, date_format="%Y-%m-%d %H:%M:%S"):
+        """检查字符串是否是当日的午夜。"""
+        datetime_obj = datetime.strptime(date_str, date_format)
+        datetime_midnight = datetime.combine(datetime_obj.date(), datetime.min.time())
+        return datetime_obj == datetime_midnight
+
+
+### 获取当前自然日的日期字符串
+
+    from datetime import datetime
+    natural_date = str(datetime.now().date())
+
+### Formate Year/Month/Day without 0 padding
+
+        import datetime
+        "{dt.year}{dt.month}{dt.day}".format(dt=datetime.datetime.now())
+
+>   This will delete the key-value pair if key in my_dict, otherwise defualt_value will be returned, so you won't get an error when key isn't in my_dict
+
+### 快速将字符串解析成datetime对象
+    from dateutil import parser
+    datetime_obj = parser.parse(datetime_str, fuzzy=True)
+
+> fuzzy=True会开启模糊模式，忽略一些parser不能识别的字符
+
+### 快速打印格式化的当前年月日和时分秒
+    import time
+    time.strftime('%F %T')
+    # %F 是年月日在time模块里的快捷表示，%T是时分秒的快捷表示, 样例：2015-01-01 00:00:00
+
+
+
 * if List_A exists, iter over List_A, otherwise iter over List_B
 
         for i in List_A or List_B:
             print i
 
-* Formate Year/Month/Day without 0 padding
-
-        import datetime
-        "{dt.year}{dt.month}{dt.day}".format(dt=datetime.datetime.now())
 
 * delete one item from a dict
 
         my_dict.pop(key, default_value)
-
->   This will delete the key-value pair if key in my_dict, otherwise defualt_value will be returned, so you won't get an error when key isn't in my_dict
-

@@ -1,9 +1,17 @@
-#############           LOG         #####################
+### Revert merge
+1. using `git log` to see which commit is prior to your merge commit.
+2. using `git reset --hard commit_sha` to revert to that commit.
+
+## LOG
+
+### Diff a single file
+`git diff -- myfile` to view unadded file diff.  
+`git diff --cached -- myfile` to view added file diff.
+
 ### Show git repo size
 Run these 2 commands in serial order:
     git gc
     git count-objects -vH
-
 
 ### show commit message and HEAD only
     git log --pretty=oneline
@@ -35,7 +43,8 @@ Run these 2 commands in serial order:
 ### Compare same file between 2 commits.
     git diff $start_commit..$end_commit -- path/to/file
 
-###################         REMOTE          ###########################
+
+## REMOTE
 
 ### Set local branch to pull from target remote branch
     git branch --set-upstream-to=origin/remote_branch_name local_branch_name
@@ -65,8 +74,13 @@ Run these 2 commands in serial order:
 ### Push local branch to remote tracking branch by force, whcih may cause remote commit loss, use it with caution.
     git push -f
 
-##################          BRANCH          ###########################
 
+## BRANCH
+
+### change branch name
+Assume you are already in the branch which you want to rename:
+
+    git branch -m new_name
 
 ### create a branch from current branch and checkout to it at the same time
     git checkout -b branch_name
@@ -106,9 +120,7 @@ Run these 2 commands in serial order:
     git pull --rebase
 
 
-###################         TAG             ############################
-
-
+## TAG
 
 ### list all tags contains "key_word"
     git tag -l "*key_word*"
@@ -138,7 +150,7 @@ Run these 2 commands in serial order:
     git rev-parse tag_name
 
 
-###################         OTHERS          ###########################
+## OTHERS
 
 
 ### Apply a change info in a particular commit to current branch:

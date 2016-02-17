@@ -1,4 +1,4 @@
-Everyone nowadays have an extended brain, and this is mine. As said by Yue, everyone needs a knowledge wiki.
+Everyone nowadays have an extended brain, and this is mine.
 
 Actually, this whole git system is part of my brain extension.
 

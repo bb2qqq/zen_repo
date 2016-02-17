@@ -3,6 +3,52 @@
 [Python 3 Source Code](https://www.python.org/downloads/release/python-350/) [//]: # (选Gzipped source tarball)  
 [PYPY Source Code](https://bitbucket.org/pypy/pypy/downloads) [//]: # (选Download repository)
 
+## lambda
+lambda can be used to create small anonymous functions.  
+lambda是`def func()`的语法糖，但它的定义只能是单个的expression.  
+lambda的使用方法是: 定义输入参数，定义返回值，好了，这是你要的函数。  
+
+lambda的一个常用用法是用于各类筛选函数(key=func)
+
+    # 球员属性值
+    >>> Ronaldo = {'skill': 9, 'speed': 10, 'teamwork': 8, 'name': "Cristinano Ronaldo"}
+    >>> Messi = {'skill': 10, 'speed': 8, 'teamwork': 9, 'name': "Lionel Messi"}
+    >>> Neymar = {'skill': 9, 'speed': 9, 'teamwork': 9, 'name': "Junior Neymar"}
+    >>> player_list = [Ronaldo, Messi, Neymar]
+
+    # 寻找谁是团队毒瘤
+    >>> min(player_list, key=lambda x: x['teamwork'])
+    {'name': 'Cristinano Ronaldo', 'skill': 9, 'speed': 10, 'teamwork': 8}
+
+    # 谁技术最好
+    >>> max(player_list, key=lambda x: x['skill'])
+    {'name': 'Lionel Messi', 'skill': 10, 'speed': 8, 'teamwork': 9}
+
+    # 将球员按绝对速度从大到小排序
+    >>> sorted(player_list, key=lambda x: x['speed'], reverse=True)
+    [{'name': 'Cristinano Ronaldo', 'skill': 9, 'speed': 10, 'teamwork': 8},
+     {'name': 'Junior Neymar', 'skill': 9, 'speed': 9, 'teamwork': 9},
+     {'name': 'Lionel Messi', 'skill': 10, 'speed': 8, 'teamwork': 9}]
+
+
+另一个用法是用在简单的函数生成器里：
+
+    def make_multiplier(factor):
+        return lambda x: x * factor
+
+    >>> multiple_3 = make_multiplier(3)
+    >>> multiple_3(5)
+    15
+
+当然single expression从理论上而言允许你写出无限长的语句，但是你最好不要这样用它。lambda应当用于简短的函数定义里。以下是一个toy case, I wrote it for fun, please don't use it in practice.
+
+    complicate_lambda_func = lambda *args, **kwargs: \
+        "No message" if len(args) + len(kwargs) < 2  \
+        else "Yes, sir!" if ('id' in kwargs and kwargs['id'] == 'General') \
+        else "There is no door for you" if 'alibaba' in args \
+        else "It's already long enough, let's top here"
+
+
 ## Descriptors                                                                                                                          <a id="Descriptors"></a>
 
 ### Definition and Introduction
@@ -10,7 +56,8 @@ In general, a descriptor is an object attribute with "binding behaviour", one wh
 `__get__()`, `__set__()` or `__delete__()` forms the descriptor protocol.  
 If any of these three methods are defined for an object, the object is said to be a descriptor.  
 
-The default behavior for attribute access is to get, set, or delete the attribute from object's dictionar y.  
+The default behavior for attribute access is to get, set, or delete the attribute from object's dictionary.  
+
 For instance, `a.x` has a lookup chain starting with `a.__dict__['x']`, then `type(a).__dict__['x']`, and continuing through the base classes of type(a) excluding metaclasses. [Metaclass Introduction][MI]  
 If the looked-up value is an object in whinch defined one of the descriptor methods, then Python may override the default behavior and invoke the descriptor instead(if it is a data-descriptor and `__getattribute__` not overriden).  
 Descriptors only work for new style objects and classes. (classes which inherits from `object` or `type`)  
@@ -24,13 +71,15 @@ They are used throughout Python itself to implement the new style classes. Descr
 `descriptor.__set__(self, obj, value) --> None`  
 `descriptor.__delete__(self, obj) --> None`  
 
-`non-data descriptors` are those with only `__get__` method, meanwhile `data descriptors` does have both `__get__` and `__set__` method.  
+`non-data descriptors` are those with only `__get__` method, meanwhile `data descriptors` does have `__get__` plus any or both of `__set__` method and `__delete__` method.  
+
 `data descriptors` precede instance's dictionary, meanwhile `non-data descriptors` has lower priority than instance's dictionary.  
 
 If you want to make a read-only `data descriptor`, you can defining its`__set__()` method like this:
 
       def __set__(self, obj, value):
           raise AttributeError("This is a read-only data-descriptor!")
+
 
 ### Invoking Descriptors
 
@@ -53,9 +102,20 @@ The important points to remember are:
       * __getattribute__() is only available with new style claesses and objects
       * object.__getattribute__() and type.__getattribute__() make different calls to __get__().
       * data descriptors always override instance dictionaries.
-      * non-data descriptors may be overridden by instance dictionaries.
+      * non-data descriptors may be overridden by instance dictionaries. (Note here we write instance, not Class!)
+      * In Class, the non-data descriptor is triggered via `Class.__dict__`,  
+        but you can't change `Class.__dict__` once that class is loaded. So overriden issue mentioned above is not possible in Class.
 
 The object returned by `super()` also has a custom `__getattribute__()` method for invoking descriptors. The action `super(B, obj).m` searches `obj.__class__.__mro__` for the base class `A` immediately following `B` and then returns `A.__dict__['m'].__get__(obj, B)`
+
+Descriptor激活**机理描述**:
+假设我们有一个类MyClass，`my_instance`是由类MyClass生成的实例。  
+当我们调用`MyClass.attr`时，我们会去MyClass的`__dict__`里寻找`"attr"`key，如果没有该key，返回AttributeError;   
+如果有`"attr"`key, 且该key对应的value有`__get__`方法，Python会调用该方法，向该方法传入两个值：None, MyClass自己，并将调用得到的返回值返回给用户;  
+如果`"attr"`key对应的value没有`__get__`方法，则返回该value本身。  
+
+对于`my_instance.attr`的调用行为，Python会先用`typ
+
 
 ### Properties
 Calling property() is a succint way of building a data descriptor that triggers function calls upon acess to an attribute. Its signature is:
@@ -151,20 +211,161 @@ property**机理描述**：
             self._val = val
 
 
-如想进一步了解为何上文的`height_func_body`没有特定函数名，请参见相关的[Decorator文档](#Decorators)
-
-__Important points about property__
-
-* what property() returns is definitely a `data descriptor`, as it has default `__set__` and `__get__` method.
+what property() returns is definitely a `data descriptor`, as it has default `__set__` and `__get__` method.
 
 
-[How @property works?](http://stackoverflow.com/questions/17330160/how-does-the-property-decorator-work)
+References:
 
-[MI]: http://stackoverflow.com/questions/100003/what-is-a-metaclass-in-python
-
+如想进一步了解为何上文的`height_func_body`没有特定函数名，请参见相关的[Decorator文档](#Decorators)  
+[How @property works?](http://stackoverflow.com/questions/17330160/how-does-the-property-decorator-work)  
 > For experiments about `non-data descriptors`, see [here](http://www.cafepy.com/article/python_attributes_and_methods/ch01s04.html)  
 > 关于object里的`__getattribute__`如何运行，可以查看`~/source_code/PYPY_source_code/pypy/objspace/descroperation.py`里第80行`Object`类的`descr__getattribute__`方法。
 
+### Functions and Methods
+Python's object oriented features are built upon a function based environment, by using non-data descriptors.  
+Class dictionaries store methods as functions.  
+The only difference between method and function is that method's first argument is reserved for the object instance.  
+To support method calls, functions include the `__get__()` method for binding methods during attribute access.  
+This means that all functions are non-data descriptors which return bound or unbound methods depending whether they are invoked from an object or a class.  
+In pure python, it works like this:
+
+    class Function(object):
+        # . . .
+        def __get__(self, obj, objtype=None):
+            "Simulate fun_descr_get() in Objects/funcobject.c"
+            return types.MethodType(self, obj, objtype)
+
+Let's see an example:
+
+    >>> class E(object):
+            # self is just a name convention for first arg of functions inside a class, we can also name it x or any other thing.
+            def f(self_and_x):
+                print "f is printing: ", self_and_x
+
+    >>> e = E()
+    >>> E.__dict__['f']
+    <function __main__.f>
+    >>> E.f
+    <unbound method E.f>
+    >>> e.f
+    <bound method E.f of <__main__.E object at 0x107542a90>>
+
+    # When calling from __dict__ of E, f is just a normal function
+    >>> E.__dict__['f']("function f prints anything you type")
+    f is printing:  function f prints anything you type
+
+    # When calling as unbound method of E, f requires an instance of E as first parameter
+    >>> e2 = E()
+    >>> E.f(e2)
+    f is printing:  <__main__.E object at 0x1075428d0>
+
+    # When calling as bound method of e, f automatically passed the instance itself as first parameter.
+    >>> e.f()
+    f is printing:  <__main__.E object at 0x107542a90>
+
+The output suggest that bound and unbound methodds are two different tpyes.  
+But the actual C implementation of `PyMethod_Type` in Objects/classobject.c is a single representation depending on whether the `im_self` filed is set or is NULL.  
+
+Likewise, the effects of calling a method object depend on the `im_self` field.  
+If set(meaning bound), the original function(stored in the `im_func` field) is called as expected with the first argument set to the instance stored in `im_self` field.  
+If unbound, all the arguments are passed unchanged to the original function. But it will raise TypeError if the first arg is not an instance of class.
+
+Let's see examples continuing with the previous example:
+
+    # Get the original func by calling im_func attribute
+    >>> E.f.im_func
+    <function __main__.f>
+    >>> E.f.im_func('we can print anything again')
+    f is printing:  we can print anything again
+
+    # Unbound method donesn't have im_self value
+    >>> E.f.im_self is None
+    True
+
+    # Calling im_func from bound method
+    >>> e.f.im_func
+    <function __main__.f>
+    >>> e.f.im_func('im_func attribute of bound method give us func!')
+    f is printing:  im_func attribute of bound method give us func!
+
+    # Bound method have im_self value refers to the instance
+    >>> e.f.im_self is e
+    True
+
+### Static Methods and Class Methods
+
+Static Methods acts just the same like a function, except it is called as an attr of a class/instance.  
+Meanwhile Class Methods is a bound method, which always passes the `Class` but not the `instance` as the first arg to the method,  
+it can be triggered as an attr of a class/instance.
+
+      class E2(object):
+          def normal_m(arg1):
+              print arg1
+
+          @classmethod
+          def class_m(arg1):
+              print arg1
+
+          @staticmethod
+          def static_m(arg1):
+              print arg1
+
+
+      In [1]: e2 = E2()
+
+      In [2]: e2.normal_m()
+      <__main__.E2 object at 0x107362d90>
+
+      In [3]: e2.class_m()
+      <class '__main__.E2'>
+
+      In [4]: e2.static_m()
+      ---------------------------------------------------------------------------
+      TypeError                                 Traceback (most recent call last)
+      <ipython-input-4-8273c49c257a> in <module>()
+      ----> 1 e2.static_m()
+
+      TypeError: static_m() takes exactly 1 argument (0 given)
+
+      In [5]: e2.static_m('static_method act like function')
+      static_method act like function
+
+The implementation of static method can be illustrate as:
+
+      class StaticMethod(object):
+       "Emulate PyStaticMethod_Type() in Objects/funcobject.c"
+
+       def __init__(self, f):
+            self.f = f
+
+       def __get__(self, obj, objtype=None):
+            return self.f
+
+Talking about class methods, dict.fromkeys() is a good example, below is its pure python equivalent implementation:
+
+      class Dict(object):
+          . . .
+          def fromkeys(klass, iterable, value=None):
+              "Emulate dict_fromkeys() in Objects/dictobject.c"
+              d = klass()
+              for key in iterable:
+                  d[key] = value
+              return d
+          fromkeys = classmethod(fromkeys)
+
+And this is the python equivalent for `classmethod()`:
+      class ClassMethod(object):
+           "Emulate PyClassMethod_Type() in Objects/funcobject.c"
+
+           def __init__(self, f):
+                self.f = f
+
+           def __get__(self, obj, klass=None):
+                if klass is None:
+                     klass = type(obj)
+                def newfunc(*args):
+                     return self.f(klass, *args)
+                return newfunc
 
 ## Decorators                                                                                                                               <a id="Decorators"></a>
 ### what is decorator?
@@ -333,6 +534,188 @@ Let's test it:
      # TEST PASSED, NO ASSERTION ERROR ARISED
 
 # Built-in Functions
+待学习built-in funcs:
+
+
+### format
+format的基本格式是`[[fill]align][sign][#][0][width][,][.precision][type]`.  
+是不是有点懵圈？没关系，把下面的文档看一遍再回来看就差不多了。  
+
+用来控制python对象的答应格式，输入必选的target值和可选的自定义format格式参数，返回一个特定格式的字符。  
+默认的格式是`""`, 返回的实际上就是`str(value)`。  
+这是[官方地址](https://docs.python.org/2/library/string.html#formatspec)
+
+旧版的format感觉是为了和C对接所写的，里面的大部分格式都是关于数字的。  
+不过我在文档示例里发现了一种padding的format格式写法，其抽象表达式是 `"padding符" + "位置符" + "字符总长度"`。  
+`padding符`是你用来作为填充的符号，可以是任意符号。  
+`位置符`用于指明`padding符`加于何处，`>`表示padding加在字符最前面，`<`表示padding加在字符尾部后, `^`表示padding加在字符的两边。  
+`字符总长度`表示格式化后字符的总长度，它并不是指示增加多少个`padding符`, 得额外注意。  
+如果遇到左右padding符不能均分的情况，会优先增加右边的padding符。  
+如果字符总长度小于原字符长度，format函数将返回原字符。
+以下是一些示例：
+
+    # 在开头padding
+    >>> format("X", "*>3")
+    '**X'
+
+    # 在结尾padding
+    >>> format("X", "*<3")
+    'X**'
+
+    # 在两边padding
+    >>> format("X", "*^3")
+    '*X*'
+
+    # 左右padding不均等
+    >>> format("X", '*^4')
+    '*X**'
+
+    # 字符总长度参数小于原字符长度
+    >>> format("X", '*^1')
+    'X'
+
+-----------------------------------
+**New style format**
+在python2.7以上的版本里，字符串对象自带的format方法可以支持很多好玩的玩法。
+
+    # format with arg index
+    >>> "I worked in {2}{1}{3}".format("A", "B", "C", "D")
+    'I worked in CBD'
+
+    # arg index can be used multiple times
+    >>> "If you feel stressed, just say {0}, {0}, {1}".format("Oh", "Ah")
+    'If you feel stressed, just say Oh, Oh, Ah'
+
+    # Using *args to unpack string
+    >>> "I worked in {2}{1}{3}".format(*"ABCD")      # string is an iterater
+    'I worked in CBD'
+
+    # Using *args to unpack list
+    >>> "I worked in {2}{1}{3}".format(*["A", "B", "C", "D"])
+    'I worked in CBD'
+
+    # Using *args to unpack tuple
+    >>> "I worked in {2}{1}{3}".format(*("A", "B", "C", "D"))
+    'I worked in CBD'
+
+
+    # Keyword args format
+    >>> "I don't {verb} my {noun} very much".format(verb="like", noun="job")
+    "I don't like my job very much"
+
+    # Using **kwargs to unpack keyword args from dict
+    >>> "I don't {verb} my {noun} very much".format(**{"verb": "hate", "noun": "job"})
+    "I don't hate my job very much"
+
+    # Using keyword args multiple times
+    >>> "All I wanna say is {verb} {verb} {verb}".format(**{"verb": "love"})
+    'All I wanna say is love love love'
+
+
+    # Accessing arg's attribute
+    >>> "This is a {0.__class__}".format("Any string")
+    "This is a <type 'str'>"
+    >>> "This is a {my_arg.__class__}".format(my_arg=set([]))
+    "This is a <type 'set'>"
+
+    # Accessing arg's items(LIST)
+    # 在str.format里，列表取值不支持倒序取值和列表切片取值
+    >>> '{0[5]}'.format(range(10))
+    '5'
+
+    # Accessing arg's items(DICT)
+    # 请注意，在用key调用arg的item时, 我们使用的key外面没有单引号或双引号，如果加了会报错，这和一般的从字典里取值有差别。
+    # 我推测python会自动对`[key name]`里的key name加上引号，从第二个例子里的`pet phrase`取值可以看出来。
+
+    >>> "Call {0[num]} to contact {0[name]}".format({'num': 110, 'name': 'Police'})
+    'Call 110 to contact Police'
+    >>> Mary = {'name': 'Mary', 'age': 38, 'pet phrase': "Don't be overproud, God is watching you!"}
+    >>> Jack = {'name': "Jack", 'age': 42, 'pet phrase': "Clean your own ass first!"}
+    >>> raw_story = """{mom[name]} is my mother, she is {mom[age]} old, once my father {dad[name]} won a chess champion, he went home delightly and speak loudly "Guess who is champion today?!", "{mom[pet phrase]} {dad[name]}", my mom said. This really piss my dad off, he counters back, "{dad[pet phrase]} {mom[name]}." """
+    >>> formated_story = raw_story.format(dad=Jack, mom=Mary)
+    >>> print formated_story
+
+    # Accessing nested arg items(DICT)
+    >>> D = {'D2': {'D3': "Mempheis"}}
+    >>> '{0[D2][D3]}'.format(D)
+    'Mempheis'
+
+使用新版的format你还可以轻松的将数字转化为各类格式的字符表现形式。
+
+    # 百分号表示
+    >>> '{:.2%}'.format(7/13.0)
+    '53.85%'
+
+    # 用逗号按千为单位分隔数字
+    >>> '{:,}'.format(123456789)
+    '123,456,789'
+
+    # 将数字以16进制和8进制形式表现
+    >>> 'hex: {0:#x}, oct: {0:#o}'.format(11)
+    'hex: 0xb, oct: 0o13'
+
+    # 格式化datetime对象
+    >>> import datetime
+    >>> now = datetime.datetime.now()
+    >>> "{0:%S:%M:%H %d-%m-%Y}".format(now)
+    '30:31:18 15-12-2015'
+
+你还可以在format格式里搞嵌套，以下是两个样例：
+
+    >>> fill = '*'
+    >>> width = 20
+    >>> for align, text in zip('>^<', ['prefix', 'center', 'suffix']):
+    >>>     print "{0:{fill}{align}{width}}".format(text, align=align, fill=fill, width=width)
+    **************prefix
+    *******center*******
+    suffix**************
+
+    width = 8
+    for num in range(6, 12):
+        for base in 'dxob':
+            print "{0:{width}{base}}".format(num, base=base, width=width),   # Comma in the end will suppress newline print
+        print           # print mere a newline
+
+对非数字对象使用precision，是表示取该字符的多少位作为本体，通过下面两个例子可以体会一下之前说的格式化字符总长度和precision长度之间的相互关系:
+
+    >>> format('abcd', '*^2.5')
+    'abcd'
+
+    >>> format('abcd', '*^8.3')
+    '**abc***'
+
+### chr
+输入序号值(0-255)，返回相对应的ascii编码。  
+如果该编码有python里对应的字符，返回该python字符，反之返回'\x' + 16进制数字编码的python-ascii字符表示码。  
+但是python表示符和python-ascii表示符在python里是等效的，见下例:
+
+    >>> chr(9)
+    '\t'
+    >>> '\t' is '\x09'
+    True
+    >>> print "Let's \t test \x09 it"
+    Let's    test    it
+
+这是一个[ascii码和相应字符对应表](http://www.asciitable.com/), 我们可以用一些特殊代码在python里做一些好玩的事情，比如：
+
+    # '\x08' 是 backspace, 这儿的backspace只移动光标
+    >>> print '123\x08\x08\x084'
+    423
+
+    # 'x7f' 是第127个ascii 字符，代表DEL, 我们可以用他来删除光标下的字符
+    >>> print '123\x08\x08\x7f'
+    1 3
+
+    # '\x0b' 是 vertical tab
+    >>> print "Hello\x0bMy friends.\x0bI'm\x0bVertical Tab!"
+    Hello
+         My friends.
+                    I'm
+                       Vertical Tab!
+
+### ord
+这是chr的反函数，你输入一个字符给它，它会返回该字符相应的ascii码序号
+
 ### type
 You can use type with 1 or 3 arguments.  
 With `type(one_arg)`, you got the type of `one_arg`.  
@@ -349,10 +732,17 @@ The `dict` argument will initiliaze the `__dict__` attribute and update its cont
 Belowing are two identical ways of create a class.
 
     # First way
-    class X(ob
-
+    class X(dict):
+        a = 1
 
     # Second way
+    >>> X = type('X', (dict,), {'a': 1})
+
+    # The first arg need not to be identical to the variable name, samples like below also works.
+    >>> Zorro = type('王大锤', (object,), {})
+    >>> Zorro
+    __main__.王大锤
+
 
 ### super
 The basic usage is `super(Class, instance)`, when you use it, the following steps will happen:
@@ -368,8 +758,6 @@ Below is the official doc version about `super(Class, instance)`'s behaviour:
      The call super(B, obj).m() searches obj.__class__.__mro__ for the base class A immediately following B
      and then returns A.__dict__['m'].__get__(obj, B). If not a descriptor, m is returned unchanged.
      If not in the dictionary, m reverts to a search using object.__getattribute__().
-
-
 
 
 When you used `super(Class1, Class2)`, you will get the delegate whose position is after `Class1` in `Class2`'s `__mro__` list.  
@@ -417,67 +805,6 @@ Equal to a ** b
 
     >>>pow(2, 3)
     >>>8
-
-
-
-# Built-in Modules
-
-## array
-
-In python, an array is like a list, except it only accept certain types of value.
-
-    >>>import array
-    >>>num_array = array.array('i', range(5))
-    >>>print num_array
-    >>>array('i', [0, 1, 2, 3, 4])
-
-## math
-
-### Ceiling a number
-Return value is float
-
-    >>>import math
-    >>>math.ceil(10.000001)
-    >>>11.0
-    >>>math.ceil(1)
-    >>>1.0
-
-### Floor a number
-Return value is float
-
-    >>>import math
-    >>>math.floor(9.999999)
-    >>>9.0
-    >>>math.floor(8)
-    >>>8.0
-
-### Get the Square root of a number
-Return value is float
-
-    >>>import math
-    >>>math.sqrt(9)
-    >>>3.0
-    >>>math.sqrt(3)
-    >>>1.7320508075688772
-
-
-## cmath
-cmath refers to complicate math
-
-### Get the Square root of a negative number
-Return value is complicate number
-
-    >>>import cmath
-    >>>a = cmath.sqrt(-1)
-    >>>a
-    1j
-    >>>a ** a
-    (0.20787957635076193+0j)
-
-
-## __future__
-A module to store features that will be implement in future python.
-
 
 
 # Syntaxs
@@ -554,3 +881,8 @@ If there isn't such code in ascii, you'll saw unrecongnizable code on your scree
 
 
 > md5 will map the given text to a number between 0 to `2 ** 128`
+
+
+
+[//]: # (TagLink Area)
+[MI]: http://stackoverflow.com/questions/100003/what-is-a-metaclass-in-python
