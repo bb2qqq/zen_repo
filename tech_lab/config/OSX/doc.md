@@ -116,6 +116,8 @@ Meanwhile using `karabiner` to do other kind of manipulations.
     Preference -> Appearance -> Panes/Screen
     Desactivate Show title bar option
 
+*Change pane position*
+    Right click a pane, choose `Swap with session`, then click another pane to swap with.
 
 # SYS CONFIG
 ### Regularly backup use timemachine

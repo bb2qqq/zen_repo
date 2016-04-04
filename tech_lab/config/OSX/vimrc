@@ -8,6 +8,7 @@ so /Users/zen1/zen_tool.vim
 
 " Abbreviation
 " wrap all cuurent file datas with python list formats
+":%s/^/"/g|%s/$/",/g|1s/^/[/|$s/$/]/
 
 " wrap all current file datas with python list formats
 " For more discussion between <bar> and |, visit:
@@ -33,6 +34,13 @@ ca fn put %
 
 " markdown comment
 ia cmt [//]: # (Type_your_comments_here)
+" html comment
+ia hcmt <!-- Type_your_comments_here -->
+" C language and CSS comment
+ia ccmt /* Type_your_comments_here */
+" Python doc
+ia pd """:param::returns:"""
+
 
 " Add python empty doc
 command! Doc normal 0i"""<cr>"""
@@ -157,6 +165,8 @@ autocmd FileType python match ExtraWhitespace /\s\+$/
 " MARKDOWN CONFIG
 autocmd FileType markdown set shiftwidth=2
 
+" HTML CONFIG
+autocmd FileType html set shiftwidth=2 | set softtabstop=2
 
 " C CONFIG
 setlocal comments-=://      " Disable auto insert // in a new line after a comment

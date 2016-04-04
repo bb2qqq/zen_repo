@@ -68,6 +68,7 @@ alias crawl='pushd /Users/zen1/zen/zen_repo/tech_lab/python_mania/module/scrapy/
 alias math='/Users/zen1/zen/zen_repo/tech_lab/math'
 alias top_thing_for_now='/Users/zen1/zen/zen_repo/TOP_THING_FOR_NOW'
 alias nzd='pushd /Users/zen1/zen/zen_dict/'
+alias flaksr='pushd /Users/zen1/zen/zen_repo/creation/flaskr'
 
 
 # COMMANDS
@@ -87,6 +88,7 @@ alias j='vim ./'
 alias h='cd ..; vim ./'
 alias l='cd ..; vim ./'
 alias n='pbpaste | tr -d "\n" | pbcopy'  # Remove newlines in clipboard
+alias v='vim'
 alias rdm='vim readme.md'
 alias vg='valgrind --track-origins=yes'
 alias ez='make exz && ./exz'
@@ -132,8 +134,8 @@ alias ga='git add .'
 
 
 # FILE MANIPULATION
-alias 1='vim /users/zen1/zen/zen_repo/notes/1'
-alias 2='vim /users/zen1/zen/zen_repo/notes/2.txt'
+alias 1='vim /users/zen1/zen/zen_repo/notes/integrated_diary.md'
+alias 2='open /Users/zen1/Downloads/Ulysses\ v1.2.2/Ulysses.app'
 alias 3='vim ~/local_repo/3'
 alias cien='vim ~/local_repo/master_obra/cien'
 alias vb='vim ~/.bashrc'
@@ -155,7 +157,8 @@ alias gotl='pushd /Users/zen1/zen/shared/code_port/backend_thailand'
 alias goen='pushd /Users/zen1/zen/shared/code_port/backend_english'
 alias goab='pushd /Users/zen1/zen/shared/code_port/backend_abstract'
 alias goport='pushd /Users/zen1/zen/shared/code_port/'
-alias gogb='pushd /Users/zen1/zen/shared/genesis/backend'
+alias gogb='pushd /Users/zen1/zen/shared/code_port/backend_home'
+alias ogogb='pushd /Users/zen1/zen/shared/genesis/backend'
 alias pys='pushd /Users/zen1/zen/zen_repo'
 alias zs='pushd /Users/zen1/zen/zen_repo'
 alias dream='pushd ~/zen/zen_repo/MAKE_MY_DREAM_COME_TRUE'
@@ -255,7 +258,7 @@ export -f zd
 # 使用z + [file_name] + content来储存你的文本到指定的cache
 # 用用x + [file_name] 来粘贴cache里的内容
 multi_clip_dir="/Users/zen1/zen/zen_repo/tech_lab/utils/multple_clipboard/buffer_zone/tmp"
-default_multi_clip_text="/Users/zen1/zen/shared/genesis/backend/"
+default_multi_clip_text="/Users/zen1/zen/shared/code_port/backend_home/"
 function z {
     if [ -n "$1" ]
         then

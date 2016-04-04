@@ -1,4 +1,23 @@
 [//]: # (此文件里的技巧可以保证适用于python2.7版本，但在较旧或3系列的python版本里，可能会失效)
+### GET absolute path of current file
+    import os
+    CUR_PATH = os.path.abspath(os.path.dirname(__file__))
+
+> you can combine `CUR_PATH` with `os.path.pardir` to make a parent path of `CUR_PATH`,  
+> by using `os.path.join(CUR_PATH, os.path.pardir)`.
+
+### Return the last value if a seires a value is all True, otherwise get the first value equavilent to False
+    rc = 1 and 2 and 3
+    >>> rc
+    3
+    rc2 = 'aa' and False and 0
+    >>> rc2
+False
+
+### Make a tmp file
+    import tempfile
+    file_descriptor, file_path = tempfile.mkstemp()
+
 
 ### Copy multiple object in a list
 

@@ -16,6 +16,7 @@
 
 # Install Python Tools
 * pylint (代码检查简直太好用）
+* coverage (检查测试代码覆盖度)
 
 # Install ipython3
 Install ipython3 on OSX is a bit tricky.  

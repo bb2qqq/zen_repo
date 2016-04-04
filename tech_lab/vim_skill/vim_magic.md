@@ -1,3 +1,6 @@
+### View local vim buffers
+    vim ~/.viminfo
+
 ### Exec vim command to multiple files(argdo)
 Basic usage:
     :args *file_pattern

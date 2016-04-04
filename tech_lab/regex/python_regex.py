@@ -272,7 +272,8 @@ Belowing is an example:
 """ Regular expression also allow you to modify strings """
 
 RE_STRING_METHOD = {
-    'split()': 'Split the string into a list, splitting it wherever the RE matches',    'sub()': 'Find all substrings where the RE matches, and replace them with a different string',
+    'split()': 'Split the string into a list, splitting it wherever the RE matches',
+    'sub()': 'Find all substrings where the RE matches, and replace them with a different string',
     'subn()': 'Does the same as sub(), but returns the new string and the number of replacements.',
     }
 
