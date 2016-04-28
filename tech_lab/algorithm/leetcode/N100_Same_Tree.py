@@ -11,20 +11,7 @@ Description:
 
 """
 
-# Definition for a binary tree node.
-# class TreeNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
-
-class Solution(object):
-    def isSameTree(self, p, q):
-        """
-        :type p: TreeNode
-        :type q: TreeNode
-        :rtype: bool
-        """
+# 2015-11-23 11:23
 
 # 先把之前的Binary Tree全路径代码复制过来。
 # 这回复习下怎么找全路径的。
@@ -49,12 +36,67 @@ class Solution(object):
 # 并没有想明白自己哪儿错了，去leetcode上提问了。
 
 
+
+
+# 2016-04-05 11:24
+
+# 新的思路是依次遍历两个tree，比较每个遍历的值是否相等
+# FIXME: 做这道题的时候，要小心，TreeNode的val可能是0，如果代码里写有if not Node,
+# 则可能会遇到unexpected error
+# 还是有样例失败了，弄不清楚原因，显示如下：
+
+# Input:
+# [0,1]
+# [0,1]
+# Output:
+# false
+# Expected:
+# true
+
+
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
 class Solution(object):
+    def isSameTree(self, p, q):
+        """
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype: bool
+        """
+        p_path = self.traverse_node(p)
+        q_path = self.traverse_node(q)
+
+        return p_path == q_path
+
+    def traverse_node(self, node):
+        """
+        :paramn node: obj of TreeNode
+        :returns: list
+        """
+        # 非obj类型直接返回
+        if not isinstance(node, TreeNode):
+            return [node]
+
+        cur_path = [node.val]
+        if isinstance(node.left, TreeNode) :
+            cur_path.extend(self.traverse_node(node.left))
+        else:
+            cur_path.append(node.left)
+        if isinstance(node.right, TreeNode) :
+            cur_path.extend(self.traverse_node(node.right))
+        else:
+            cur_path.append(node.left)
+        return cur_path
+
+
+class Obsolete_Solution(object):
     """
-    209 / 209 test cases passed.
-    Status: Accepted
-    Runtime: 52 ms
-    Submitted: 0 minutes ago
+     2015-11-23 11:23
 
     """
 

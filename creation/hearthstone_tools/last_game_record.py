@@ -1,0 +1,1 @@
+last_game_record=[True, True, True, True, True, True, True, True, True, True, True, True, True, True, False, True, True, True, False, True, True, True, True, True, False, True, True, True, True, True, False, True, True, True, True, True]

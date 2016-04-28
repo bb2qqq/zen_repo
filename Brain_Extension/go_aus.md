@@ -13,3 +13,11 @@ Alternatively, digital photos can also be provided.
 Each photograph should:
     * be of the head and shoulders against a plain background and
     * be labelled with the applicant's name.
+
+Employment references must meet the following requirements:
+be written on the official letterhead of the company or government department providing the reference;
+the letterhead should indicate clearly the full address of the company and any telephone, fax numbers, e-mail and website addresses;
+the name and position of the person authorised to sign the employment reference should be typed or stamped below that person’s signature;
+the contact telephone number of the person writing the reference should be included in the letter;
+the letter should indicate the exact period of employment (including whether permanent or temporary, full or part-time), position(s) held, the duties undertaken and the salary earned - positions should not be described by generic titles (eg. research officer, public servant) but according to the nature of the duties undertaken (eg. research chemist, accounts clerk); and
+a payslip from your current employment should also be included – this is especially important from applicants working in government departments.
