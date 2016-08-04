@@ -15,7 +15,7 @@
         brew install vim
 
     Change bashrc:
-        vim='/usr/bin/vim'
+        vim='/usr/local/bin/vim'
 
     install python3:
         brew install python3
